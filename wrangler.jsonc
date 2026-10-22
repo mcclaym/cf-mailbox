@@ -1,0 +1,57 @@
+// 免绑卡版（由 scripts/lite-config.mjs 自动生成）：不使用 R2，邮件正文存 D1，大附件存 KV
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "cf-mailbox",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-01",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "workers_dev": true,
+  "preview_urls": false,
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": [
+      "/api/*",
+      "/auth/*"
+    ]
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "cf-mailbox",
+      "migrations_dir": "migrations","database_id": "6d932acd-bd03-49f4-88e9-78d561e5e24f"
+    },
+    {
+      "binding": "BLOBS",
+      "database_name": "cf-mailbox-blobs","database_id": "3d0d349f-973c-4068-b462-5d0bf6d6e012"
+    }
+  ],
+  "send_email": [
+    {
+      "name": "EMAIL"
+    }
+  ],
+  "vars": {
+    "WORKER_NAME": "cf-mailbox"
+  },
+  "triggers": {
+    "crons": [
+      "* * * * *",
+      "17 3 * * *"
+    ]
+  },
+  "ai": {
+    "binding": "AI"
+  },
+  "observability": {
+    "enabled": true
+  },
+  "kv_namespaces": [
+    {
+      "binding": "KV","id": "d207bcc5164e45369c45bab4b2d78559"
+    }
+  ]
+}
